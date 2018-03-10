@@ -8,8 +8,8 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/todofancy');
 
-// var index = require('./routes/index');
-// var users = require('./routes/users');
+var index = require('./routes/index');
+var users = require('./routes/users');
 
 var app = express();
 
