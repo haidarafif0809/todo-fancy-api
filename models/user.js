@@ -5,7 +5,10 @@ const userSchema = new Schema({
   name:  String,
   email:  String,
   fbId:  String,
-  createdAt: Date.now
+  createdAt: {
+    type: Date,
+    default: Date.now
+  }
 });
 
 module.exports = mongoose.model('User',userSchema);
