@@ -8,6 +8,10 @@ const todoSchema = new Schema({
     ref: 'User'
   },
   dueDate: Date,
+  status:{
+    type: Number,
+    default: 0
+  },
   createdAt: {
     type: Date,
     default: Date.now
