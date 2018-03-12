@@ -10,6 +10,7 @@ mongoose.connect('mongodb://localhost/todofancy');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
+var todos = require('./routes/todos');
 
 var app = express();
 
@@ -25,6 +26,7 @@ app.use(cors());
 
 app.use('/', index);
 app.use('/users', users);
+app.use('/api/todos', todos);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
