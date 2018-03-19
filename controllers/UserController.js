@@ -7,7 +7,7 @@ module.exports = {
     FB.api('me', { fields: ['id', 'name','email'], access_token: req.body.accessToken }, function (response) {
       User.findOne({
         email: response.email
-      },(data) => {
+      },(err, data) => {
         if (data) {
           const token = jwt.sign({ _id: data._id }, 'secret');
           res.status(200).json({
