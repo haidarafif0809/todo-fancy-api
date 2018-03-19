@@ -20,6 +20,7 @@ module.exports = {
     });
   },
   index: (req,res) => {
+    console.log(req.user._id);
     Todo.find({
       user: req.user._id
     })
