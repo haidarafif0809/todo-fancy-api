@@ -1,8 +1,9 @@
 const Todo = require('../models/todo');
 module.exports = {
   create: (req,res) => {
+    const { title, description, dueDate } = req.body;
     let todo = new Todo({
-      text: req.body.text,
+      title, description, dueDate,
       user: req.user._id,
       dueDate: req.body.dueDate
     });
@@ -39,7 +40,9 @@ module.exports = {
         err
         });
       if(data.user == req.user._id) {
-        Todo.findOneAndUpdate({_id:req.params.id},req.body,{ new: true},(err,data) => {
+        const  { title , description , dueDate } = req.body;
+        let input = { title, description, dueDate };
+        Todo.findOneAndUpdate({_id:req.params.id},input,{ new: true},(err,data) => {
           res.status(200).json({
             message: "Success Update Todos",
             data
@@ -58,8 +61,9 @@ module.exports = {
         message: "Something Went Wrong",
         err
         });
+      const status = data.status + 1;
       if(data.user == req.user._id) {
-        Todo.findOneAndUpdate({_id:req.params.id},{ status: 1},{ new: true},(err,data) => {
+        Todo.findOneAndUpdate({_id:req.params.id},{ status: status},{ new: true},(err,data) => {
           res.status(200).json({
             message: "Success Completed Todo",
             data
@@ -78,8 +82,9 @@ module.exports = {
         message: "Something Went Wrong",
         err
         });
+      const status = data.status - 1;
       if(data.user == req.user._id) {
-        Todo.findOneAndUpdate({_id:req.params.id},{ status: 0},{ new: true},(err,data) => {
+        Todo.findOneAndUpdate({_id:req.params.id},{ status: status},{ new: true},(err,data) => {
           res.status(200).json({
             message: "Success Completed Todo",
             data
